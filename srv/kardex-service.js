@@ -4,16 +4,14 @@ const cds = require('@sap/cds');
 
 module.exports = async (srv) => {
 
-  const { Alumnos, Cursos, Calificaciones } = srv.entities('sap.ui.kardex');
-
   const AlumnoIDPattern = /^[A-Z0-9]{8,20}$/;
   const CursoIDPattern = /^[A-Z]{2,4}[0-9]{2,4}$/;
 
-  srv.before('CREATE', Calificaciones, async (req) => {
+  srv.before('CREATE', 'sap.ui.kardex.Calificaciones', async (req) => {
     await validarCalificacion(req);
   });
 
-  srv.before('UPDATE', Calificaciones, async (req) => {
+  srv.before('UPDATE', 'sap.ui.kardex.Calificaciones', async (req) => {
     await validarCalificacion(req);
   });
 
@@ -45,7 +43,7 @@ module.exports = async (srv) => {
     req.data.estado = estado;
   }
 
-  srv.after('READ', Calificaciones, (each) => {
+  srv.after('READ', 'sap.ui.kardex.Calificaciones', (each) => {
     if (each.nota !== undefined) {
       each.nota = parseFloat(each.nota);
     }
