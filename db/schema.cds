@@ -23,6 +23,9 @@ context schema {
     @Title : 'Fecha de ingreso a la universidad'
         fechaIngreso: Date not null;
 
+    @Title : 'Estado del alumno (Activo/Inactivo)'
+        actividad   : String(20) not null default 'Activo';
+
     @Title : 'Calificaciones del alumno'
         calificaciones : Association to many Calificaciones on calificaciones.alumno = $self;
   }
@@ -40,6 +43,9 @@ context schema {
 
     @Title : 'Número de créditos'
         creditos    : Integer not null;
+
+    @Title : 'Estado del curso (Activo/Inactivo)'
+        actividad   : String(20) not null default 'Activo';
 
     @Title : 'Calificaciones registradas'
         calificaciones : Association to many Calificaciones on calificaciones.curso = $self;

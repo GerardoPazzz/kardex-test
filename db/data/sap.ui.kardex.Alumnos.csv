@@ -1,0 +1,6 @@
+ID;nombre;apellido;carrera;email;fechaIngreso;actividad
+20200101;Maria;Gonzalez;Ingeniería de Sistemas;mgonzalez@universidad.edu;2020-03-01;Activo
+20200102;Carlos;Rodriguez;Ingeniería Civil;crodriguez@universidad.edu;2020-03-01;Activo
+20210105;Ana;Martinez;Ingeniería Electrónica;amartinez@universidad.edu;2021-03-01;Activo
+20220108;Luis;Hernandez;Ingeniería Mecánica;lhernandez@universidad.edu;2022-03-01;Activo
+20230110;Sofia;Lopez;Ingeniería Industrial;slopez@universidad.edu;2023-03-01;Activo

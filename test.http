@@ -1,0 +1,163 @@
+@baseUrl = http://localhost:4004/odata/v4/kardex
+@alumnoID = 20200101
+@cursoID = CS101
+@calificacionID = 00000001-0000-0000-0000-000000000001
+@newAlumnoID = 20240120
+@newCursoID = CS103
+
+#################################################################################
+### ALUMNOS
+#################################################################################
+
+### Alumnos - Leer lista de alumnos
+GET {{baseUrl}}/Alumnos
+Accept: application/json
+
+### Alumnos - Leer alumno por ID
+GET {{baseUrl}}/Alumnos/{{alumnoID}}
+Accept: application/json
+
+### Alumnos - Leer alumno con calificaciones (expand)
+GET {{baseUrl}}/Alumnos/{{alumnoID}}?$expand=calificaciones
+Accept: application/json
+
+### Alumnos - Crear nuevo alumno
+POST {{baseUrl}}/Alumnos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "ID": "{{newAlumnoID}}",
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "carrera": "Ingeniería de Sistemas",
+  "email": "jperez@universidad.edu",
+  "fechaIngreso": "2024-03-01",
+  "actividad": "Activo"
+}
+
+### Alumnos - Modificar alumno
+PUT {{baseUrl}}/Alumnos/{{alumnoID}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombre": "María",
+  "apellido": "González",
+  "carrera": "Ingeniería de Sistemas",
+  "email": "mgonzalez@universidad.edu",
+  "fechaIngreso": "2020-03-01",
+  "actividad": "Activo"
+}
+
+### Alumnos - Eliminar alumno (soft delete - cambia a Inactivo)
+DELETE {{baseUrl}}/Alumnos/{{alumnoID}}
+
+### Alumnos - Reactivar alumno (cambiar a Activo)
+PUT {{baseUrl}}/Alumnos/{{alumnoID}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "actividad": "Activo"
+}
+
+#################################################################################
+### CURSOS
+#################################################################################
+
+### Cursos - Leer lista de cursos
+GET {{baseUrl}}/Cursos
+Accept: application/json
+
+### Cursos - Leer curso por ID
+GET {{baseUrl}}/Cursos/{{cursoID}}
+Accept: application/json
+
+### Cursos - Leer curso con calificaciones (expand)
+GET {{baseUrl}}/Cursos/{{cursoID}}?$expand=calificaciones
+Accept: application/json
+
+### Cursos - Crear nuevo curso
+POST {{baseUrl}}/Cursos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "ID": "{{newCursoID}}",
+  "nombre": "Base de Datos",
+  "descripcion": "Fundamentos de bases de datos relacionales y SQL",
+  "creditos": 4,
+  "actividad": "Activo"
+}
+
+### Cursos - Modificar curso
+PUT {{baseUrl}}/Cursos/{{cursoID}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombre": "Programación I (Actualizado)",
+  "descripcion": "Fundamentos de programación estructurada y algoritmos",
+  "creditos": 5,
+  "actividad": "Activo"
+}
+
+### Cursos - Eliminar curso (soft delete - cambia a Inactivo)
+DELETE {{baseUrl}}/Cursos/{{cursoID}}
+
+### Cursos - Reactivar curso (cambiar a Activo)
+PUT {{baseUrl}}/Cursos/{{cursoID}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "actividad": "Activo"
+}
+
+#################################################################################
+### CALIFICACIONES
+#################################################################################
+
+### Calificaciones - Leer lista de calificaciones
+GET {{baseUrl}}/Calificaciones
+Accept: application/json
+
+### Calificaciones - Leer calificación por ID
+GET {{baseUrl}}/Calificaciones/{{calificacionID}}
+Accept: application/json
+
+### Calificaciones - Filtrar por alumno
+GET {{baseUrl}}/Calificaciones?$filter=alumno_ID eq '{{alumnoID}}'
+Accept: application/json
+
+### Calificaciones - Filtrar por curso
+GET {{baseUrl}}/Calificaciones?$filter=curso_ID eq '{{cursoID}}'
+Accept: application/json
+
+### Calificaciones - Crear nueva calificación
+POST {{baseUrl}}/Calificaciones
+Content-Type: application/json
+Accept: application/json
+
+{
+  "alumno_ID": "{{alumnoID}}",
+  "curso_ID": "{{cursoID}}",
+  "nota": 17.50,
+  "semestre": "2026-II"
+}
+
+### Calificaciones - Modificar calificación
+PUT {{baseUrl}}/Calificaciones/{{calificacionID}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "alumno_ID": "{{alumnoID}}",
+  "curso_ID": "{{cursoID}}",
+  "nota": 18.00,
+  "semestre": "2026-I"
+}
+
+### Calificaciones - Eliminar calificación
+DELETE {{baseUrl}}/Calificaciones/{{calificacionID}}
